@@ -12,7 +12,6 @@
         .font-serif { font-family: 'Playfair Display', serif; }
         .text-gold { color: #cbb08c; }
         .border-gold { border-color: #e8dcc4; }
-        .bg-shabby { background-color: #fdfaf5; }
         
         .rose-pink { color: #f48fb1; fill: #f48fb1; }
         .rose-blue { color: #90caf9; fill: #90caf9; }
@@ -23,19 +22,20 @@
             50% { transform: translateY(-10px); }
         }
 
-        .form-input { border: 1px solid #e8dcc4; border-radius: 15px; padding: 14px; width: 100%; outline: none; transition: all 0.3s; background: white; color: #5d4e41; }
-        .form-input:focus { border-color: #cbb08c; box-shadow: 0 0 0 4px rgba(203, 176, 140, 0.1); }
-        .btn-rsvp { background-color: #5d4e41; color: white; padding: 16px; border-radius: 15px; font-weight: 700; width: 100%; transition: all 0.3s; text-transform: uppercase; letter-spacing: 2px; border: none; cursor: pointer; }
-        .btn-rsvp:hover { background-color: #4a3e34; transform: scale(1.02); }
-        .btn-rsvp:disabled { background-color: #a3a3a3; cursor: not-allowed; }
+        .btn-rsvp-yes { background-color: #5d4e41; color: white; padding: 20px; border-radius: 18px; font-weight: 700; width: 100%; transition: all 0.3s; text-transform: uppercase; letter-spacing: 2px; border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(93, 78, 65, 0.2); }
+        .btn-rsvp-yes:hover { background-color: #4a3e34; transform: scale(1.02); }
+        
+        .btn-rsvp-no { background-color: transparent; color: #8a7663; padding: 14px; border-radius: 18px; font-weight: 500; width: 100%; transition: all 0.3s; border: 1px solid #e8dcc4; cursor: pointer; margin-top: 12px; font-size: 0.85rem; }
+        .btn-rsvp-no:hover { background-color: #f9f3ea; }
+        
         .error-banner { background-color: #fee2e2; color: #b91c1c; padding: 10px; text-align: center; font-size: 0.8rem; display: none; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #ef4444; }
+        .already-voted-msg { background-color: #f3f4f6; color: #6b7280; padding: 20px; border-radius: 18px; font-weight: 500; text-align: center; border: 1px dashed #d1d5db; }
     </style>
 </head>
 <body class="relative overflow-x-hidden min-h-screen">
 
-    <!-- Banner Diagnostico -->
     <div id="connection-error" class="error-banner">
-        ⚠️ Connessione al database non riuscita. Verifica le Regole su Firebase e l'accesso Anonimo.
+        ⚠️ Problema di sincronizzazione con il database.
     </div>
 
     <!-- Decorazioni Sfondo -->
@@ -47,43 +47,42 @@
 
     <div class="relative z-10 max-w-4xl mx-auto px-4 py-8 md:py-16">
         
-        <!-- Header con Orsetti e Rose -->
         <header class="text-center mb-12">
             <div class="relative inline-block w-full max-w-3xl bg-white/60 backdrop-blur-md p-8 md:p-14 border-2 border-gold rounded-[2rem] shadow-sm">
                 
                 <div class="flex justify-center items-end gap-2 md:gap-8 mb-8 teddy-float">
-                    <!-- Orsetto Gioele (Rosa Blu) -->
+                    <!-- Primo Orsetto (Rosa) -->
                     <div class="flex flex-col items-center">
                         <svg viewBox="0 0 100 100" class="w-20 h-20 md:w-32 md:h-32 text-gold/40" fill="currentColor">
                             <circle cx="30" cy="30" r="12"/><circle cx="70" cy="30" r="12"/><circle cx="50" cy="50" r="35"/>
-                            <circle cx="50" cy="60" r="12" fill="white" fill-opacity="0.4"/>
-                            <circle cx="40" cy="45" r="3" fill="#5d4e41"/><circle cx="60" cy="45" r="3" fill="#5d4e41"/>
-                        </svg>
-                        <i data-lucide="flower-2" class="rose-blue w-8 h-8 -mt-6 relative z-20"></i>
-                    </div>
-
-                    <div class="pb-10"><span class="text-4xl text-gold font-light">†</span></div>
-
-                    <!-- Orsetto Sole (Rosa Rosa) -->
-                    <div class="flex flex-col items-center">
-                        <svg viewBox="0 0 100 100" class="w-20 h-20 md:w-32 md:h-32 text-gold/40" fill="currentColor">
-                            <circle cx="30" cy="30" r="12"/><circle cx="70" cy="30" r="12"/><circle cx="50" cy="50" r="35"/>
-                            <circle cx="50" cy="60" r="12" fill="white" fill-opacity="0.4"/>
+                            <circle cx="50" cy="60" r="12" fill="white" fillOpacity="0.4"/>
                             <circle cx="40" cy="45" r="3" fill="#5d4e41"/><circle cx="60" cy="45" r="3" fill="#5d4e41"/>
                         </svg>
                         <i data-lucide="flower-2" class="rose-pink w-8 h-8 -mt-6 relative z-20"></i>
                     </div>
+
+                    <div class="pb-10"><span class="text-4xl text-gold font-light">†</span></div>
+
+                    <!-- Secondo Orsetto (Blu) -->
+                    <div class="flex flex-col items-center">
+                        <svg viewBox="0 0 100 100" class="w-20 h-20 md:w-32 md:h-32 text-gold/40" fill="currentColor">
+                            <circle cx="30" cy="30" r="12"/><circle cx="70" cy="30" r="12"/><circle cx="50" cy="50" r="35"/>
+                            <circle cx="50" cy="60" r="12" fill="white" fillOpacity="0.4"/>
+                            <circle cx="40" cy="45" r="3" fill="#5d4e41"/><circle cx="60" cy="45" r="3" fill="#5d4e41"/>
+                        </svg>
+                        <i data-lucide="flower-2" class="rose-blue w-8 h-8 -mt-6 relative z-20"></i>
+                    </div>
                 </div>
 
                 <h2 class="text-xs md:text-sm uppercase tracking-[0.4em] text-[#8a7663] mb-4 font-bold">Santo Battesimo di</h2>
-                <h1 class="text-5xl md:text-7xl font-serif text-[#5d4e41] mb-8 tracking-tight italic">Sole e Gioele</h1>
+                <h1 class="text-5xl md:text-7xl font-serif text-[#5d4e41] mb-8 tracking-tight italic text-balance">Sole e Gioele</h1>
                 
                 <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10 border-y border-gold/30 py-6 px-4">
-                    <div class="flex items-center gap-3 text-brown">
+                    <div class="flex items-center gap-3 text-[#5d4e41]">
                         <i data-lucide="calendar" class="text-gold w-6 h-6"></i>
                         <span class="text-xl md:text-2xl font-medium">Domenica 19 Aprile</span>
                     </div>
-                    <div class="flex items-center gap-3 text-brown">
+                    <div class="flex items-center gap-3 text-[#5d4e41]">
                         <i data-lucide="clock" class="text-gold w-6 h-6"></i>
                         <span class="text-xl md:text-2xl font-medium">Ore 15:00</span>
                     </div>
@@ -91,85 +90,82 @@
             </div>
         </header>
 
-        <!-- Messaggio di Benvenuto -->
-        <section class="text-center mb-16 max-w-3xl mx-auto px-2">
+        <section class="text-center mb-16 max-w-3xl mx-auto px-2 text-balance leading-relaxed">
             <div class="bg-white/80 p-10 md:p-14 rounded-[3rem] border border-gold shadow-sm relative">
-                <p class="text-xl md:text-2xl leading-relaxed italic text-[#5d4e41] font-light">
+                <p class="text-xl md:text-2xl italic text-[#5d4e41] font-light italic">
                     “Carissimi amici e familiari,<br/><br/>
-                    siamo felici di invitarvi a celebrare insieme a noi il battesimo di <strong class="not-italic text-[#5d4e41] font-bold">Gioele e Sole</strong>, un momento speciale pieno di amore e gioia.<br/><br/>
-                    La vostra presenza sarà il dono più bello per condividere questa giornata così importante.<br/><br/>
+                    siamo felici di invitarvi a celebrare insieme a noi il battesimo di <strong class="not-italic text-[#5d4e41] font-bold text-brown">Gioele e Sole</strong>, un momento speciale pieno di amore e gioia.<br/><br/>
+                    La vostra presenza sarà il dono più bello.<br/><br/>
                     Con affetto, vi aspettiamo.”
                 </p>
             </div>
         </section>
 
-        <!-- Dettagli Logistici -->
         <div class="grid md:grid-cols-2 gap-8 mb-16">
             <div class="bg-white p-10 rounded-[2.5rem] border-2 border-gold/50 text-center shadow-sm">
-                <div class="w-16 h-16 bg-shabby rounded-full flex items-center justify-center mx-auto mb-6 text-gold">
+                <div class="w-16 h-16 bg-[#fdfaf5] rounded-full flex items-center justify-center mx-auto mb-6 text-gold">
                     <i data-lucide="church"></i>
                 </div>
                 <h3 class="text-xs font-bold mb-3 uppercase tracking-[0.2em] text-[#8a7663]">La Cerimonia</h3>
-                <p class="text-2xl font-serif font-bold mb-1 text-brown">Chiesa di Sant'Andrea</p>
+                <p class="text-2xl font-serif font-bold mb-1 text-[#5d4e41]">Chiesa di Sant'Andrea</p>
                 <p class="text-[#8a7663] italic">in Pesciaiola (PI)</p>
             </div>
 
-            <div class="bg-white p-10 rounded-[2.5rem] border-2 border-gold/50 text-center shadow-sm">
-                <div class="w-16 h-16 bg-shabby rounded-full flex items-center justify-center mx-auto mb-6 text-gold">
+            <div class="bg-white p-10 rounded-[2.5rem] border-2 border-gold/50 text-center shadow-sm text-balance">
+                <div class="w-16 h-16 bg-[#fdfaf5] rounded-full flex items-center justify-center mx-auto mb-6 text-gold">
                     <i data-lucide="utensils"></i>
                 </div>
                 <h3 class="text-xs font-bold mb-3 uppercase tracking-[0.2em] text-[#8a7663]">Il Rinfresco</h3>
-                <p class="text-2xl font-serif font-bold mb-1 text-brown">Circolo La Fragola</p>
+                <p class="text-2xl font-serif font-bold mb-1 text-[#5d4e41]">Circolo La Fragola</p>
                 <p class="text-[#8a7663] text-sm leading-relaxed">Piazza Federico Borromeo, 3<br>56017 San Giuliano Terme</p>
             </div>
         </div>
 
-        <!-- RSVP Form con Realtime Database -->
+        <!-- RSVP ANONIMO CON LIMITE -->
         <section id="rsvp" class="bg-[#f9f3ea] rounded-[3rem] p-10 md:p-16 border-2 border-gold shadow-lg">
             <div id="rsvp-content">
                 <div class="text-center mb-10">
                     <h2 class="text-4xl font-serif mb-2 text-[#5d4e41] uppercase tracking-tight">Conferma Presenza</h2>
-                    <p class="text-[#8a7663] italic">Saremmo felici di averti con noi!</p>
+                    <p class="text-[#8a7663] italic">Facci sapere se sarai con noi!</p>
                 </div>
 
-                <form id="rsvp-form" class="space-y-5 max-w-md mx-auto">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" id="firstName" required class="form-input" placeholder="Il tuo nome">
-                        <input type="text" id="lastName" required class="form-input" placeholder="Il tuo cognome">
-                    </div>
-                    <textarea id="note" rows="3" class="form-input resize-none" placeholder="Note (Allergie, numero bimbi, seggioloni...)"></textarea>
-                    <button type="submit" id="submit-btn" class="btn-rsvp w-full">Invia Conferma</button>
-                </form>
+                <div id="rsvp-controls" class="max-w-xs mx-auto">
+                    <button id="btn-confirm-yes" class="btn-rsvp-yes flex items-center justify-center gap-3">
+                        <i data-lucide="check" class="w-6 h-6"></i> SÌ, CI SARÒ!
+                    </button>
+                    
+                    <button id="btn-confirm-no" class="btn-rsvp-no">
+                        Purtroppo non potrò
+                    </button>
+                    <p id="votes-left" class="text-[10px] text-center mt-4 uppercase text-[#8a7663] font-bold tracking-widest opacity-60"></p>
+                </div>
+
+                <div id="already-voted" class="hidden already-voted-msg mt-4">
+                    <p>Hai raggiunto il numero massimo di conferme (5) per questo dispositivo. Grazie!</p>
+                </div>
             </div>
 
             <div id="success-msg" class="hidden text-center py-12">
-                <i data-lucide="check-circle" class="w-16 h-16 text-green-500 mx-auto mb-6"></i>
-                <h2 class="text-4xl font-serif mb-4 text-[#5d4e41]">Grazie di cuore!</h2>
-                <p class="text-[#8a7663] text-xl italic mb-8">La tua partecipazione è stata salvata con successo.</p>
-                <button onclick="window.location.reload()" class="text-[#5d4e41] font-bold uppercase tracking-widest text-xs border-b-2 border-gold pb-1 cursor-pointer">Registra un altro ospite</button>
+                <i data-lucide="heart" class="w-16 h-16 text-rose-400 mx-auto mb-6 fill-rose-400"></i>
+                <h2 class="text-4xl font-serif mb-4 text-[#5d4e41]">Grazie!</h2>
+                <p class="text-[#8a7663] text-xl italic mb-8">La tua risposta è stata registrata con successo.</p>
+                <button onclick="window.location.reload()" class="text-[#5d4e41] font-bold uppercase tracking-widest text-xs border-b-2 border-gold pb-1 cursor-pointer">Registra un'altra persona</button>
             </div>
         </section>
 
-        <!-- Sezione Conteggio e Lista Invitati -->
+        <!-- DASHBOARD CONTEGGIO -->
         <div class="text-center mt-12 mb-20 flex flex-col items-center">
-            <div class="inline-flex items-center gap-3 bg-white border border-gold px-8 py-4 rounded-full shadow-sm">
-                <i data-lucide="users" class="w-5 h-5 text-gold"></i>
-                <span id="guest-count" class="text-sm font-bold uppercase tracking-widest text-[#5d4e41]">Sincronizzazione...</span>
+            <div class="grid grid-cols-2 gap-6 max-w-md w-full">
+                <div class="bg-white border border-gold px-8 py-6 rounded-3xl shadow-sm">
+                    <p class="text-[10px] text-[#8a7663] font-bold uppercase tracking-widest mb-2">Parteciperanno</p>
+                    <span id="count-yes" class="text-4xl font-serif text-[#5d4e41]">...</span>
+                </div>
+                <div class="bg-white border border-gold/40 px-8 py-6 rounded-3xl shadow-sm opacity-60">
+                    <p class="text-[10px] text-[#8a7663] font-bold uppercase tracking-widest mb-2">Non presenti</p>
+                    <span id="count-no" class="text-4xl font-serif text-[#5d4e41]">...</span>
+                </div>
             </div>
-            <div class="mt-6">
-                <button id="toggle-list" class="text-[10px] text-gold uppercase tracking-[0.3em] font-bold underline hover:text-brown transition-colors cursor-pointer">Vedi Elenco Invitati</button>
-            </div>
-            <div id="guest-list-container" class="hidden mt-8 w-full bg-white rounded-3xl border border-gold overflow-hidden shadow-xl text-left max-w-2xl mx-auto">
-                <table class="w-full text-sm text-brown">
-                    <thead class="bg-[#f9f3ea] border-b border-gold">
-                        <tr class="text-[#8a7663] uppercase text-[10px] tracking-widest">
-                            <th class="px-6 py-4 text-left">Invitato</th>
-                            <th class="px-6 py-4 text-left">Note</th>
-                        </tr>
-                    </thead>
-                    <tbody id="guest-table-body" class="divide-y divide-gold/20"></tbody>
-                </table>
-            </div>
+            <p class="text-[9px] text-[#cbb08c] uppercase font-bold tracking-[0.3em] mt-8">Sincronizzazione in tempo reale</p>
         </div>
     </div>
 
@@ -184,7 +180,6 @@
 
         lucide.createIcons();
 
-        // Configurazione Firebase Realtime Database
         const firebaseConfig = {
             apiKey: "AIzaSyA-kO3aimvVSbNDqCcI8tpVenHue6lxYZI",
             authDomain: "battesimo-sole-gioele.firebaseapp.com",
@@ -195,75 +190,96 @@
             appId: "1:127131164270:web:b447e4f0f71f07956ed07f"
         };
 
+        const LOCAL_STORAGE_KEY = 'rsvp_sole_gioele_count';
+        const MAX_VOTES = 5;
+
         try {
             const app = initializeApp(firebaseConfig);
             const db = getDatabase(app);
             const auth = getAuth(app);
 
-            signInAnonymously(auth).then(() => {
-                const guestsRef = ref(db, 'invitati');
-                
-                onValue(guestsRef, (snapshot) => {
-                    const data = snapshot.val();
-                    const tableBody = document.getElementById('guest-table-body');
-                    const countSpan = document.getElementById('guest-count');
-                    tableBody.innerHTML = "";
-                    
-                    if (data) {
-                        const guests = Object.values(data);
-                        countSpan.innerText = `${guests.length} ${guests.length === 1 ? 'CONFERMA RICEVUTA' : 'CONFERME RICEVUTE'}`;
-                        // Ordina i risultati (più recenti in alto)
-                        guests.reverse().forEach(g => {
-                            tableBody.innerHTML += `<tr><td class="px-6 py-4 font-bold">${g.firstName} ${g.lastName}</td><td class="px-6 py-4 italic text-xs text-[#8a7663]">${g.note || '-'}</td></tr>`;
-                        });
-                    } else {
-                        countSpan.innerText = "0 CONFERME RICEVUTE";
-                        tableBody.innerHTML = "<tr><td colspan='2' class='px-6 py-10 text-center italic text-gold'>Ancora nessun invitato in lista.</td></tr>";
-                    }
-                }, (error) => {
-                    console.error("Errore Database:", error);
-                    document.getElementById('connection-error').style.display = 'block';
-                });
-            }).catch(error => {
-                console.error("Errore Auth:", error);
-                document.getElementById('connection-error').innerText = "Errore Accesso: Attiva 'Anonymous' in Authentication.";
-                document.getElementById('connection-error').style.display = 'block';
-            });
+            const getVoteCount = () => parseInt(localStorage.getItem(LOCAL_STORAGE_KEY) || '0');
 
-            // Gestione Invio Form
-            document.getElementById('rsvp-form').onsubmit = async (e) => {
-                e.preventDefault();
-                const btn = document.getElementById('submit-btn');
-                btn.disabled = true;
-                btn.innerText = "Salvataggio...";
+            const updateRSVPGraphics = () => {
+                const count = getVoteCount();
+                const left = MAX_VOTES - count;
+                const controls = document.getElementById('rsvp-controls');
+                const banner = document.getElementById('already-voted');
+                const votesLeftText = document.getElementById('votes-left');
 
-                try {
-                    const guestsRef = ref(db, 'invitati');
-                    const newGuestRef = push(guestsRef);
-                    await set(newGuestRef, {
-                        firstName: document.getElementById('firstName').value,
-                        lastName: document.getElementById('lastName').value,
-                        note: document.getElementById('note').value,
-                        timestamp: new Date().toISOString()
-                    });
-                    document.getElementById('rsvp-content').classList.add('hidden');
-                    document.getElementById('success-msg').classList.remove('hidden');
-                } catch (err) {
-                    alert("Errore nel salvataggio: " + err.message);
-                    btn.disabled = false;
-                    btn.innerText = "Invia Conferma";
+                if (count >= MAX_VOTES) {
+                    controls.classList.add('hidden');
+                    banner.classList.remove('hidden');
+                } else {
+                    votesLeftText.innerText = `Puoi inviare ancora ${left} ${left === 1 ? 'risposta' : 'risposte'}`;
                 }
             };
 
-            // Toggle Lista
-            document.getElementById('toggle-list').onclick = () => {
-                const container = document.getElementById('guest-list-container');
-                container.classList.toggle('hidden');
-                document.getElementById('toggle-list').innerText = container.classList.contains('hidden') ? "Vedi Elenco Invitati" : "Nascondi Elenco";
-            };
+            signInAnonymously(auth).then(() => {
+                updateRSVPGraphics();
+                
+                const rsvpRef = ref(db, 'rsvp_anonimi');
+                onValue(rsvpRef, (snapshot) => {
+                    const data = snapshot.val();
+                    const countYesSpan = document.getElementById('count-yes');
+                    const countNoSpan = document.getElementById('count-no');
+                    
+                    let yes = 0;
+                    let no = 0;
+                    
+                    if (data) {
+                        const responses = Object.values(data);
+                        responses.forEach(r => {
+                            if(r.attending) yes++; else no++;
+                        });
+                        countYesSpan.innerText = yes;
+                        countNoSpan.innerText = no;
+                    } else {
+                        countYesSpan.innerText = "0";
+                        countNoSpan.innerText = "0";
+                    }
+                }, (error) => {
+                    document.getElementById('connection-error').style.display = 'block';
+                });
+            });
+
+            async function submitRSVP(isAttending) {
+                const currentCount = getVoteCount();
+                if (currentCount >= MAX_VOTES) {
+                    alert("Hai raggiunto il numero massimo di conferme per questo dispositivo.");
+                    return;
+                }
+
+                const btnYes = document.getElementById('btn-confirm-yes');
+                const btnNo = document.getElementById('btn-confirm-no');
+                btnYes.disabled = true;
+                btnNo.disabled = true;
+
+                try {
+                    const rsvpRef = ref(db, 'rsvp_anonimi');
+                    const newEntryRef = push(rsvpRef);
+                    await set(newEntryRef, {
+                        attending: isAttending,
+                        timestamp: new Date().toISOString()
+                    });
+                    
+                    // Incrementa contatore locale
+                    localStorage.setItem(LOCAL_STORAGE_KEY, (currentCount + 1).toString());
+                    
+                    document.getElementById('rsvp-content').classList.add('hidden');
+                    document.getElementById('success-msg').classList.remove('hidden');
+                } catch (err) {
+                    alert("Impossibile inviare la risposta. Riprova più tardi.");
+                    btnYes.disabled = false;
+                    btnNo.disabled = false;
+                }
+            }
+
+            document.getElementById('btn-confirm-yes').onclick = () => submitRSVP(true);
+            document.getElementById('btn-confirm-no').onclick = () => submitRSVP(false);
 
         } catch (e) {
-            console.error("Errore Inizializzazione:", e);
+            document.getElementById('connection-error').style.display = 'block';
         }
     </script>
 </body>
