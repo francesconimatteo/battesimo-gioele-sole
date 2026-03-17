@@ -21,11 +21,11 @@
         .form-input:focus { border-color: #cbb08c; box-shadow: 0 0 0 4px rgba(203, 176, 140, 0.1); }
         .btn-rsvp { background-color: #5d4e41; color: white; padding: 16px; border-radius: 15px; font-weight: 700; width: 100%; transition: all 0.3s; text-transform: uppercase; letter-spacing: 2px; border: none; cursor: pointer; }
         .btn-rsvp:hover { background-color: #4a3e34; transform: scale(1.02); }
+        .error-box { background-color: #fee2e2; border: 1px solid #ef4444; color: #b91c1c; padding: 12px; border-radius: 12px; font-size: 0.75rem; margin-bottom: 1rem; display: none; }
     </style>
 </head>
 <body class="relative overflow-x-hidden min-h-screen">
 
-    <!-- Decorazioni Sfondo -->
     <div class="fixed inset-0 pointer-events-none opacity-[0.05] z-0 overflow-hidden">
         <div class="absolute top-10 left-10"><i data-lucide="flower-2" class="w-20 h-20 rose-pink"></i></div>
         <div class="absolute top-1/2 right-10"><i data-lucide="flower-2" class="w-24 h-24 rose-blue"></i></div>
@@ -34,22 +34,19 @@
 
     <div class="relative z-10 max-w-4xl mx-auto px-4 py-8 md:py-16">
         
-        <!-- Header con Orsetti -->
         <header class="text-center mb-12">
             <div class="relative inline-block w-full max-w-3xl bg-white/60 backdrop-blur-md p-8 md:p-14 border-2 border-gold rounded-[2rem] shadow-sm">
                 <div class="flex justify-center items-end gap-2 md:gap-8 mb-8 teddy-float">
                     <div class="flex flex-col items-center">
                         <svg viewBox="0 0 100 100" class="w-20 h-20 md:w-32 md:h-32 text-gold/40" fill="currentColor">
-                            <circle cx="30" cy="30" r="12"/><circle cx="70" cy="30" r="12"/><circle cx="50" cy="50" r="35"/>
-                            <circle cx="50" cy="60" r="12" fill="white" fill-opacity="0.4"/>
+                            <circle cx="30" cy="30" r="12"/><circle cx="70" cy="30" r="12"/><circle cx="50" cy="50" r="35"/><circle cx="50" cy="60" r="12" fill="white" fill-opacity="0.4"/>
                         </svg>
                         <i data-lucide="flower-2" class="rose-blue w-8 h-8 -mt-6 relative z-20"></i>
                     </div>
                     <div class="pb-10"><span class="text-4xl text-gold font-light">†</span></div>
                     <div class="flex flex-col items-center">
                         <svg viewBox="0 0 100 100" class="w-20 h-20 md:w-32 md:h-32 text-gold/40" fill="currentColor">
-                            <circle cx="30" cy="30" r="12"/><circle cx="70" cy="30" r="12"/><circle cx="50" cy="50" r="35"/>
-                            <circle cx="50" cy="60" r="12" fill="white" fill-opacity="0.4"/>
+                            <circle cx="30" cy="30" r="12"/><circle cx="70" cy="30" r="12"/><circle cx="50" cy="50" r="35"/><circle cx="50" cy="60" r="12" fill="white" fill-opacity="0.4"/>
                         </svg>
                         <i data-lucide="flower-2" class="rose-pink w-8 h-8 -mt-6 relative z-20"></i>
                     </div>
@@ -64,48 +61,44 @@
             </div>
         </header>
 
-        <!-- Messaggio -->
         <section class="text-center mb-16 max-w-2xl mx-auto px-4">
-            <div class="bg-white/80 p-10 rounded-[3rem] border border-gold shadow-sm">
-                <p class="text-xl md:text-2xl leading-relaxed italic text-brown font-light leading-relaxed">
-                    “Carissimi amici e familiari,<br><br>
-                    siamo felici di invitarvi a celebrare insieme a noi il battesimo di <b>Gioele e Sole</b>, un momento speciale pieno di amore e gioia.<br><br>
-                    La vostra presenza sarà il dono più bello per condividere questa giornata così importante.<br><br>
-                    Con affetto, vi aspettiamo.”
-                </p>
+            <div class="bg-white/80 p-10 rounded-[3rem] border border-gold shadow-sm text-lg italic font-light">
+                <p>“Carissimi amici e familiari,<br><br>siamo felici di invitarvi a celebrare insieme a noi il battesimo di <b>Gioele e Sole</b>... La vostra presenza sarà il dono più bello. Vi aspettiamo!”</p>
             </div>
         </section>
 
-        <!-- Info Luoghi -->
         <div class="grid md:grid-cols-2 gap-8 mb-16">
             <div class="bg-white p-10 rounded-[2.5rem] border-2 border-gold/50 text-center shadow-sm">
                 <i data-lucide="church" class="mx-auto mb-4 text-gold" size="32"></i>
                 <h3 class="text-xs font-bold mb-2 uppercase tracking-widest text-[#8a7663]">Cerimonia</h3>
-                <p class="text-2xl font-serif font-bold mb-1">Chiesa di Sant'Andrea</p>
+                <p class="text-2xl font-serif font-bold">Chiesa di Sant'Andrea</p>
                 <p class="text-[#8a7663] italic">in Pesciaiola (PI)</p>
             </div>
             <div class="bg-white p-10 rounded-[2.5rem] border-2 border-gold/50 text-center shadow-sm">
                 <i data-lucide="utensils" class="mx-auto mb-4 text-gold" size="32"></i>
                 <h3 class="text-xs font-bold mb-2 uppercase tracking-widest text-[#8a7663]">Rinfresco</h3>
-                <p class="text-2xl font-serif font-bold mb-1">Circolo La Fragola</p>
-                <p class="text-[#8a7663] text-sm leading-relaxed">Piazza Federico Borromeo, 3</p>
+                <p class="text-2xl font-serif font-bold">Circolo La Fragola</p>
+                <p class="text-[#8a7663] text-sm">Piazza Federico Borromeo, 3</p>
             </div>
         </div>
 
-        <!-- RSVP Form -->
         <section class="bg-[#f9f3ea] rounded-[3rem] p-10 md:p-14 mb-16 border-2 border-gold shadow-lg">
             <div id="rsvp-content">
                 <div class="text-center mb-10">
-                    <h2 class="text-4xl font-serif mb-2">Conferma Partecipazione</h2>
+                    <h2 class="text-4xl font-serif mb-2 text-brown">Conferma Partecipazione</h2>
                     <p class="text-[#8a7663] italic">Ti aspettiamo con gioia!</p>
                 </div>
+
+                <!-- Box per errori diagnostici -->
+                <div id="debug-error" class="error-box"></div>
+
                 <form id="rsvp-form" class="space-y-5 max-w-md mx-auto">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <input type="text" id="firstName" required class="form-input" placeholder="Nome">
                         <input type="text" id="lastName" required class="form-input" placeholder="Cognome">
                     </div>
                     <textarea id="note" rows="3" class="form-input resize-none" placeholder="Note (Allergie, bimbi...)"></textarea>
-                    <button type="submit" id="submit-btn" class="btn-rsvp">Conferma Presenza</button>
+                    <button type="submit" id="submit-btn" class="btn-rsvp">Invia Conferma</button>
                 </form>
             </div>
             <div id="success-msg" class="hidden text-center py-12">
@@ -116,11 +109,10 @@
             </div>
         </section>
 
-        <!-- Admin View -->
         <div class="text-center mt-12 mb-20">
             <div class="inline-flex items-center gap-3 bg-white border border-gold px-8 py-3 rounded-full shadow-sm">
                 <i data-lucide="users" class="w-4 h-4 text-gold"></i>
-                <span id="guest-count" class="text-xs font-bold uppercase tracking-widest text-[#8a7663]">Caricamento...</span>
+                <span id="guest-count" class="text-xs font-bold uppercase tracking-widest text-[#8a7663]">Connessione in corso...</span>
             </div>
             <div class="mt-4">
                 <button id="toggle-list" class="text-[10px] text-gold uppercase tracking-[0.2em] font-bold">Vedi Elenco Invitati</button>
@@ -132,7 +124,6 @@
                 </table>
             </div>
         </div>
-
     </div>
 
     <footer class="text-center py-16 bg-white border-t border-gold opacity-60">
@@ -146,7 +137,8 @@
 
         lucide.createIcons();
 
-        // === INCOLLA QUI I TUOI DATI SE DIVERSI ===
+        // === CONFIGURAZIONE ===
+        // CONTROLLA BENE databaseURL: deve essere quello che vedi nella scheda Realtime Database di Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyA-kO3aimvVSbNDqCcI8tpVenHue6lxYZI",
             authDomain: "battesimo-sole-gioele.firebaseapp.com",
@@ -158,61 +150,71 @@
         };
         const appId = "battesimo-sole-gioele-finale";
 
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-        const auth = getAuth(app);
+        function showError(msg) {
+            const errBox = document.getElementById('debug-error');
+            errBox.innerText = "ERRORE: " + msg;
+            errBox.style.display = 'block';
+        }
 
-        // Autenticazione e Monitoraggio in tempo reale
-        signInAnonymously(auth).then(() => {
-            const guestsRef = ref(db, `artifacts/${appId}/public/data/guests`);
-            onValue(guestsRef, (snapshot) => {
-                const data = snapshot.val();
-                const tableBody = document.getElementById('guest-table-body');
-                tableBody.innerHTML = "";
-                
-                if (data) {
-                    const guests = Object.values(data);
-                    document.getElementById('guest-count').innerText = `${guests.length} CONFERME RICEVUTE`;
-                    guests.reverse().forEach(g => {
-                        tableBody.innerHTML += `<tr><td class="px-6 py-4 font-bold">${g.firstName} ${g.lastName}</td><td class="px-6 py-4 italic text-xs text-[#8a7663]">${g.note || '-'}</td></tr>`;
+        try {
+            const app = initializeApp(firebaseConfig);
+            const db = getDatabase(app);
+            const auth = getAuth(app);
+
+            signInAnonymously(auth).then(() => {
+                const guestsRef = ref(db, `guests`); // Semplificato il percorso per test
+                onValue(guestsRef, (snapshot) => {
+                    const data = snapshot.val();
+                    const tableBody = document.getElementById('guest-table-body');
+                    tableBody.innerHTML = "";
+                    
+                    if (data) {
+                        const guests = Object.values(data);
+                        document.getElementById('guest-count').innerText = `${guests.length} CONFERME RICEVUTE`;
+                        guests.reverse().forEach(g => {
+                            tableBody.innerHTML += `<tr><td class="px-6 py-4 font-bold">${g.firstName} ${g.lastName}</td><td class="px-6 py-4 italic text-xs text-[#8a7663]">${g.note || '-'}</td></tr>`;
+                        });
+                    } else {
+                        document.getElementById('guest-count').innerText = "0 CONFERME RICEVUTE";
+                        tableBody.innerHTML = "<tr><td colspan='2' class='px-6 py-10 text-center italic text-gold'>Ancora nessuna conferma.</td></tr>";
+                    }
+                }, (err) => {
+                    showError("Permessi negati. Controlla le 'Regole' del Realtime Database su Firebase.");
+                });
+            }).catch(err => showError("Errore Auth: " + err.message));
+
+            // Gestione Invio
+            document.getElementById('rsvp-form').onsubmit = async (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('submit-btn');
+                btn.disabled = true;
+                btn.innerText = "Invio...";
+
+                try {
+                    const guestsRef = ref(db, `guests`);
+                    const newGuestRef = push(guestsRef);
+                    await set(newGuestRef, {
+                        firstName: document.getElementById('firstName').value,
+                        lastName: document.getElementById('lastName').value,
+                        note: document.getElementById('note').value,
+                        timestamp: new Date().toISOString()
                     });
-                } else {
-                    document.getElementById('guest-count').innerText = "0 CONFERME RICEVUTE";
-                    tableBody.innerHTML = "<tr><td colspan='2' class='px-6 py-10 text-center italic text-gold'>Nessun ospite ancora confermato.</td></tr>";
+                    document.getElementById('rsvp-content').classList.add('hidden');
+                    document.getElementById('success-msg').classList.remove('hidden');
+                } catch (err) {
+                    showError("Salvataggio fallito: " + err.message);
+                    btn.disabled = false;
+                    btn.innerText = "Invia Conferma";
                 }
-            });
-        });
+            };
+        } catch (e) {
+            showError("Inizializzazione fallita: " + e.message);
+        }
 
-        // Toggle Lista
         document.getElementById('toggle-list').onclick = () => {
             const container = document.getElementById('guest-list-container');
             container.classList.toggle('hidden');
             document.getElementById('toggle-list').innerText = container.classList.contains('hidden') ? "Vedi Elenco Invitati" : "Nascondi Elenco";
-        };
-
-        // Invio Form
-        document.getElementById('rsvp-form').onsubmit = async (e) => {
-            e.preventDefault();
-            const btn = document.getElementById('submit-btn');
-            btn.disabled = true;
-            btn.innerText = "Invio in corso...";
-
-            try {
-                const guestsRef = ref(db, `artifacts/${appId}/public/data/guests`);
-                const newGuestRef = push(guestsRef);
-                await set(newGuestRef, {
-                    firstName: document.getElementById('firstName').value,
-                    lastName: document.getElementById('lastName').value,
-                    note: document.getElementById('note').value,
-                    timestamp: new Date().toISOString()
-                });
-                document.getElementById('rsvp-content').classList.add('hidden');
-                document.getElementById('success-msg').classList.remove('hidden');
-            } catch (err) {
-                alert("Errore nel salvataggio. Controlla le regole del database.");
-                btn.disabled = false;
-                btn.innerText = "Conferma Presenza";
-            }
         };
     </script>
 </body>
