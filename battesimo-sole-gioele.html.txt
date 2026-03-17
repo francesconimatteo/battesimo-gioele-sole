@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battesimo di Sole e Gioele</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Montserrat', sans-serif; background-color: #fdfaf5; color: #5d4e41; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .text-gold { color: #cbb08c; }
+        .border-gold { border-color: #e8dcc4; }
+        .bg-shabby { background-color: #fdfaf5; }
+        
+        /* Rose decor */
+        .rose-pink { color: #f48fb1; fill: #f48fb1; }
+        .rose-blue { color: #90caf9; fill: #90caf9; }
+        
+        .teddy-float { animation: float 6s ease-in-out infinite; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .form-input { border: 1px solid #e8dcc4; border-radius: 15px; padding: 14px; width: 100%; outline: none; transition: all 0.3s; background: white; }
+        .form-input:focus { border-color: #cbb08c; box-shadow: 0 0 0 4px rgba(203, 176, 140, 0.1); }
+        .btn-rsvp { background-color: #5d4e41; color: white; padding: 16px; border-radius: 15px; font-weight: 700; width: 100%; transition: all 0.3s; text-transform: uppercase; letter-spacing: 2px; }
+        .btn-rsvp:hover { background-color: #4a3e34; transform: scale(1.02); }
+    </style>
+</head>
+<body class="relative overflow-x-hidden min-h-screen">
+
+    <!-- Orsetti e Rose sparsi nello sfondo -->
+    <div class="fixed inset-0 pointer-events-none opacity-[0.05] z-0 overflow-hidden">
+        <div class="absolute top-10 left-10"><i data-lucide="flower-2" class="w-20 h-20 rose-pink"></i></div>
+        <div class="absolute top-1/2 right-10"><i data-lucide="flower-2" class="w-24 h-24 rose-blue"></i></div>
+        <div class="absolute bottom-20 left-1/4"><i data-lucide="heart" class="w-16 h-16 text-gold fill-gold"></i></div>
+    </div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-4 py-8 md:py-16">
+        
+        <!-- Intestazione con Orsetti e Rose -->
+        <header class="text-center mb-12">
+            <div class="relative inline-block w-full max-w-3xl bg-white/60 backdrop-blur-md p-8 md:p-14 border-2 border-gold rounded-[2rem] shadow-sm">
+                
+                <!-- Orsetti Centrali -->
+                <div class="flex justify-center items-end gap-2 md:gap-8 mb-8 teddy-float">
+                    <!-- Orsetto con rosa rosa -->
+                    <div class="flex flex-col items-center">
+                        <svg viewBox="0 0 100 100" class="w-20 h-20 md:w-32 md:h-32 text-gold/40" fill="currentColor">
+                            <circle cx="30" cy="30" r="12"/><circle cx="70" cy="30" r="12"/><circle cx="50" cy="50" r="35"/>
+                            <circle cx="50" cy="60" r="12" fill="white" fill-opacity="0.4"/>
+                            <circle cx="40" cy="45" r="3" fill="#5d4e41"/><circle cx="60" cy="45" r="3" fill="#5d4e41"/>
+                        </svg>
+                        <i data-lucide="flower-2" class="rose-pink w-8 h-8 -mt-6 relative z-20"></i>
+                    </div>
+
+                    <div class="pb-10"><span class="text-4xl text-gold font-light">†</span></div>
+
+                    <!-- Orsetto con rosa blu -->
+                    <div class="flex flex-col items-center">
+                        <svg viewBox="0 0 100 100" class="w-20 h-20 md:w-32 md:h-32 text-gold/40" fill="currentColor">
+                            <circle cx="30" cy="30" r="12"/><circle cx="70" cy="30" r="12"/><circle cx="50" cy="50" r="35"/>
+                            <circle cx="50" cy="60" r="12" fill="white" fill-opacity="0.4"/>
+                            <circle cx="40" cy="45" r="3" fill="#5d4e41"/><circle cx="60" cy="45" r="3" fill="#5d4e41"/>
+                        </svg>
+                        <i data-lucide="flower-2" class="rose-blue w-8 h-8 -mt-6 relative z-20"></i>
+                    </div>
+                </div>
+
+                <h2 class="text-xs md:text-sm uppercase tracking-[0.4em] text-[#8a7663] mb-4 font-bold">Santo Battesimo di</h2>
+                <h1 class="text-5xl md:text-7xl font-serif text-brown mb-8 tracking-tight italic">Sole e Gioele</h1>
+                
+                <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10 border-y border-gold/30 py-6 px-4">
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="calendar" class="text-gold w-6 h-6"></i>
+                        <span class="text-xl md:text-2xl font-medium">Domenica 19 Aprile</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="clock" class="text-gold w-6 h-6"></i>
+                        <span class="text-xl md:text-2xl font-medium">Ore 15:00</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Messaggio Affettuoso -->
+        <section class="text-center mb-16 max-w-3xl mx-auto px-2">
+            <div class="bg-white/80 p-10 md:p-14 rounded-[3rem] border border-gold shadow-sm relative overflow-hidden">
+                <!-- Piccola decorazione rosa blu/rosa negli angoli -->
+                <i data-lucide="flower-2" class="rose-pink absolute -top-4 -left-4 w-12 h-12 opacity-30"></i>
+                <i data-lucide="flower-2" class="rose-blue absolute -bottom-4 -right-4 w-12 h-12 opacity-30"></i>
+                
+                <p class="text-xl md:text-2xl leading-relaxed italic text-brown font-light">
+                    “Carissimi amici e familiari,<br/><br/>
+                    siamo felici di invitarvi a celebrare insieme a noi il battesimo di <strong class="not-italic text-brown font-bold">Gioele e Sole</strong>, un momento speciale pieno di amore e gioia.<br/><br/>
+                    La vostra presenza sarà il dono più bello per condividere questa giornata così importante.<br/><br/>
+                    Con affetto, vi aspettiamo.”
+                </p>
+            </div>
+        </section>
+
+        <!-- Info Luoghi -->
+        <div class="grid md:grid-cols-2 gap-8 mb-16">
+            <div class="bg-white p-10 rounded-[2.5rem] border-2 border-gold/50 text-center shadow-sm">
+                <div class="w-16 h-16 bg-shabby rounded-full flex items-center justify-center mx-auto mb-6 text-gold shadow-inner">
+                    <i data-lucide="church"></i>
+                </div>
+                <h3 class="text-xs font-bold mb-3 uppercase tracking-[0.2em] text-[#8a7663]">La Cerimonia</h3>
+                <p class="text-2xl font-serif font-bold mb-1">Chiesa di Sant'Andrea</p>
+                <p class="text-[#8a7663] italic">Sant'Andrea in Pesciaiola (PI)</p>
+            </div>
+
+            <div class="bg-white p-10 rounded-[2.5rem] border-2 border-gold/50 text-center shadow-sm">
+                <div class="w-16 h-16 bg-shabby rounded-full flex items-center justify-center mx-auto mb-6 text-gold shadow-inner">
+                    <i data-lucide="cake"></i>
+                </div>
+                <h3 class="text-xs font-bold mb-3 uppercase tracking-[0.2em] text-[#8a7663]">Il Rinfresco</h3>
+                <p class="text-2xl font-serif font-bold mb-1">Circolo La Fragola</p>
+                <p class="text-[#8a7663] text-sm leading-relaxed">Piazza Federico Borromeo, 3<br>56017 San Giuliano Terme (PI)</p>
+            </div>
+        </div>
+
+        <!-- Menu Sfiziosità -->
+        <section class="bg-white p-10 md:p-16 rounded-[3.5rem] border border-gold mb-16 shadow-xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-6 flex gap-2">
+                <i data-lucide="flower-2" class="rose-pink w-6 h-6 opacity-40"></i>
+                <i data-lucide="flower-2" class="rose-blue w-6 h-6 opacity-40"></i>
+            </div>
+            
+            <h3 class="text-4xl font-serif italic mb-12 text-brown text-center">Antipasti e Sfiziosità</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 max-w-2xl mx-auto">
+                <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-gold"></i> Pappa al pomodoro</div>
+                <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-gold"></i> Paté di zucchine</div>
+                <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-gold"></i> Mini cheesecake salate</div>
+                <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-gold"></i> Panini assortiti</div>
+                <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-gold"></i> Pizzette e Salatini</div>
+                <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-gold"></i> Formaggio con miele</div>
+                <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-gold"></i> Crostate salate e dolci</div>
+                <div class="flex items-center gap-3"><i data-lucide="check" class="w-4 h-4 text-gold"></i> Valdostana e Fegatini</div>
+            </div>
+
+            <div class="mt-14 pt-8 border-t border-gold/40 text-center">
+                <p class="text-xs uppercase tracking-[0.4em] text-[#8a7663] mb-4 font-bold">Selezione Bevande</p>
+                <div class="bg-shabby border border-gold px-8 py-3 rounded-full inline-block text-sm italic">
+                    Vino Spumante • Succhi di Frutta • Coca Cola • Bibite Analcoliche
+                </div>
+            </div>
+        </section>
+
+        <!-- Modulo RSVP -->
+        <section id="rsvp" class="bg-[#f9f3ea] rounded-[3rem] p-10 md:p-16 border-2 border-gold shadow-lg relative overflow-hidden">
+            <div id="rsvp-content">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-serif mb-2">Conferma Partecipazione</h2>
+                    <p class="text-[#8a7663] italic">Ti aspettiamo con gioia!</p>
+                </div>
+                <form id="rsvp-form" class="space-y-5 max-w-md mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" id="firstName" required class="form-input" placeholder="Il tuo nome">
+                        <input type="text" id="lastName" required class="form-input" placeholder="Il tuo cognome">
+                    </div>
+                    <textarea id="note" rows="3" class="form-input resize-none" placeholder="Note (intolleranze, numero bimbi, seggioloni...)"></textarea>
+                    <button type="submit" id="submit-btn" class="btn-rsvp shadow-lg">
+                        Conferma la presenza
+                    </button>
+                </form>
+            </div>
+
+            <div id="success-msg" class="hidden text-center py-12">
+                <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-8 shadow-md">
+                    <i data-lucide="party-popper" class="w-12 h-12 text-green-500"></i>
+                </div>
+                <h2 class="text-4xl font-serif mb-4">Grazie!</h2>
+                <p class="text-[#8a7663] text-xl italic mb-8">Non vediamo l'ora di vederti!</p>
+                <button onclick="window.location.reload()" class="text-brown font-bold uppercase tracking-widest text-xs border-b-2 border-gold pb-1">Registra un altro ospite</button>
+            </div>
+        </section>
+
+        <!-- Footer Guest Count -->
+        <div class="text-center mt-12 mb-20">
+            <div class="inline-flex items-center gap-3 bg-white border border-gold px-10 py-3 rounded-full shadow-sm">
+                <i data-lucide="users" class="w-5 h-5 text-gold"></i>
+                <span id="guest-count" class="text-xs font-bold uppercase tracking-[0.2em] text-[#8a7663]">Aggiornamento conferme...</span>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="text-center py-16 bg-white border-t border-gold">
+        <div class="flex justify-center gap-6 mb-8">
+            <i data-lucide="flower-2" class="rose-pink w-6 h-6 teddy-float"></i>
+            <i data-lucide="heart" class="text-gold fill-gold w-6 h-6"></i>
+            <i data-lucide="flower-2" class="rose-blue w-6 h-6 teddy-float" style="animation-delay: 1s"></i>
+        </div>
+        <p class="text-gold text-xs tracking-[0.5em] font-bold uppercase">Sole & Gioele • 19.04.2025</p>
+    </footer>
+
+    <!-- Firebase Integration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        // Inizializzazione icone Lucide
+        lucide.createIcons();
+
+        // Configurazione ereditata dal sistema
+        const firebaseConfig = JSON.parse('__FIREBASE_CONFIG_JSON__'); 
+        const appId = '__APP_ID__';
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // Autenticazione Anonima e Monitoraggio Invitati
+        signInAnonymously(auth).then(() => {
+            const guestsRef = collection(db, 'artifacts', appId, 'public', 'data', 'guests');
+            onSnapshot(guestsRef, (snapshot) => {
+                const count = snapshot.size;
+                document.getElementById('guest-count').innerText = `${count} ${count === 1 ? 'PARTECIPANTE CONFERMATO' : 'PARTECIPANTI CONFERMATI'}`;
+            });
+        }).catch(err => console.error("Firebase Error:", err));
+
+        // Gestione Invio Modulo
+        const form = document.getElementById('rsvp-form');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true;
+            btn.innerText = "REGISTRAZIONE IN CORSO...";
+
+            try {
+                const guestsRef = collection(db, 'artifacts', appId, 'public', 'data', 'guests');
+                await addDoc(guestsRef, {
+                    firstName: document.getElementById('firstName').value,
+                    lastName: document.getElementById('lastName').value,
+                    note: document.getElementById('note').value,
+                    timestamp: new Date().toISOString()
+                });
+                
+                document.getElementById('rsvp-content').classList.add('hidden');
+                document.getElementById('success-msg').classList.remove('hidden');
+            } catch (err) {
+                console.error("Save Error:", err);
+                alert("Si è verificato un errore. Per favore contatta i genitori direttamente.");
+                btn.disabled = false;
+                btn.innerText = "CONFERMA LA PRESENZA";
+            }
+        });
+    </script>
+</body>
+</html>
+
