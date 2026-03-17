@@ -7,6 +7,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Chosen Palette: Elegance Gold & Pastels -->
+    <!-- Application Structure Plan: Una SPA focalizzata sull'invito e sulla conferma rapida. La struttura elimina ogni distrazione (menu, note) per massimizzare la facilità di risposta degli invitati. In questa versione, le statistiche sono protette da un PIN (2025) accessibile tramite un'icona discreta nel footer, garantendo che solo l'organizzatore possa monitorare l'andamento. -->
+    <!-- Visualization & Content Choices: 
+         - Contatori Partecipazione -> Obiettivo: Statistica privata -> Metodo: Box numerici protetti da PIN -> Justification: Riservatezza richiesta dall'utente.
+         - Iconografia -> Obiettivo: Estetica -> Metodo: Lucide Icons e SVG inline -> Justification: Leggerezza e scalabilità.
+         - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body { font-family: 'Montserrat', sans-serif; background-color: #fdfaf5; color: #5d4e41; }
         .font-serif { font-family: 'Playfair Display', serif; }
@@ -30,6 +37,9 @@
         
         .error-banner { background-color: #fee2e2; color: #b91c1c; padding: 10px; text-align: center; font-size: 0.8rem; display: none; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #ef4444; }
         .already-voted-msg { background-color: #f3f4f6; color: #6b7280; padding: 20px; border-radius: 18px; font-weight: 500; text-align: center; border: 1px dashed #d1d5db; }
+        
+        .admin-box { animation: slideUp 0.4s ease-out; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="relative overflow-x-hidden min-h-screen">
@@ -75,7 +85,7 @@
                 </div>
 
                 <h2 class="text-xs md:text-sm uppercase tracking-[0.4em] text-[#8a7663] mb-4 font-bold">Santo Battesimo di</h2>
-                <h1 class="text-5xl md:text-7xl font-serif text-[#5d4e41] mb-8 tracking-tight italic text-balance">Sole e Gioele</h1>
+                <h1 class="text-5xl md:text-7xl font-serif text-[#5d4e41] mb-8 tracking-tight italic text-balance leading-tight">Sole e Gioele</h1>
                 
                 <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10 border-y border-gold/30 py-6 px-4">
                     <div class="flex items-center gap-3 text-[#5d4e41]">
@@ -90,11 +100,11 @@
             </div>
         </header>
 
-        <section class="text-center mb-16 max-w-3xl mx-auto px-2 text-balance leading-relaxed">
+        <section class="text-center mb-16 max-w-3xl mx-auto px-2">
             <div class="bg-white/80 p-10 md:p-14 rounded-[3rem] border border-gold shadow-sm relative">
-                <p class="text-xl md:text-2xl italic text-[#5d4e41] font-light italic">
+                <p class="text-xl md:text-2xl leading-relaxed italic text-[#5d4e41] font-light italic">
                     “Carissimi amici e familiari,<br/><br/>
-                    siamo felici di invitarvi a celebrare insieme a noi il battesimo di <strong class="not-italic text-[#5d4e41] font-bold text-brown">Gioele e Sole</strong>, un momento speciale pieno di amore e gioia.<br/><br/>
+                    siamo felici di invitarvi a celebrare insieme a noi il battesimo di <strong class="not-italic text-[#5d4e41] font-bold">Gioele e Sole</strong>, un momento speciale pieno di amore e gioia.<br/><br/>
                     La vostra presenza sarà il dono più bello.<br/><br/>
                     Con affetto, vi aspettiamo.”
                 </p>
@@ -141,7 +151,7 @@
                 </div>
 
                 <div id="already-voted" class="hidden already-voted-msg mt-4">
-                    <p>Hai raggiunto il numero massimo di conferme (5) per questo dispositivo. Grazie!</p>
+                    <p>Hai inviato il numero massimo di risposte consentite. Grazie!</p>
                 </div>
             </div>
 
@@ -153,24 +163,29 @@
             </div>
         </section>
 
-        <!-- DASHBOARD CONTEGGIO -->
-        <div class="text-center mt-12 mb-20 flex flex-col items-center">
+        <!-- DASHBOARD CONTEGGIO PRIVATA -->
+        <div id="admin-section" class="hidden mt-12 mb-20 flex flex-col items-center admin-box">
             <div class="grid grid-cols-2 gap-6 max-w-md w-full">
-                <div class="bg-white border border-gold px-8 py-6 rounded-3xl shadow-sm">
-                    <p class="text-[10px] text-[#8a7663] font-bold uppercase tracking-widest mb-2">Parteciperanno</p>
+                <div class="bg-white border border-gold px-8 py-6 rounded-3xl shadow-sm text-center">
+                    <p class="text-[10px] text-[#8a7663] font-bold uppercase tracking-widest mb-2">Presenti</p>
                     <span id="count-yes" class="text-4xl font-serif text-[#5d4e41]">...</span>
                 </div>
-                <div class="bg-white border border-gold/40 px-8 py-6 rounded-3xl shadow-sm opacity-60">
-                    <p class="text-[10px] text-[#8a7663] font-bold uppercase tracking-widest mb-2">Non presenti</p>
+                <div class="bg-white border border-gold/40 px-8 py-6 rounded-3xl shadow-sm opacity-60 text-center">
+                    <p class="text-[10px] text-[#8a7663] font-bold uppercase tracking-widest mb-2">Assenti</p>
                     <span id="count-no" class="text-4xl font-serif text-[#5d4e41]">...</span>
                 </div>
             </div>
-            <p class="text-[9px] text-[#cbb08c] uppercase font-bold tracking-[0.3em] mt-8">Sincronizzazione in tempo reale</p>
+            <p class="text-[9px] text-[#cbb08c] uppercase font-bold tracking-[0.3em] mt-8 italic underline cursor-pointer" onclick="location.reload()">Sincronizzato • Clicca per chiudere</p>
         </div>
     </div>
 
-    <footer class="text-center py-16 bg-white border-t border-gold opacity-60">
-        <p class="text-gold text-xs tracking-[0.5em] font-bold uppercase">Sole & Gioele • 19 Aprile 2025</p>
+    <footer class="text-center py-16 bg-white border-t border-gold opacity-60 relative">
+        <p class="text-gold text-xs tracking-[0.5em] font-bold uppercase mb-4">Sole & Gioele • 19 Aprile 2025</p>
+        
+        <!-- Icona segreta per Admin -->
+        <button id="secret-admin-trigger" class="opacity-10 hover:opacity-100 transition-opacity p-2">
+            <i data-lucide="lock" class="w-4 h-4 text-gold"></i>
+        </button>
     </footer>
 
     <script type="module">
@@ -192,6 +207,7 @@
 
         const LOCAL_STORAGE_KEY = 'rsvp_sole_gioele_count';
         const MAX_VOTES = 5;
+        const ADMIN_PIN = "2025"; // PIN SEGRETO PER MATTEO
 
         try {
             const app = initializeApp(firebaseConfig);
@@ -211,7 +227,7 @@
                     controls.classList.add('hidden');
                     banner.classList.remove('hidden');
                 } else {
-                    votesLeftText.innerText = `Puoi inviare ancora ${left} ${left === 1 ? 'risposta' : 'risposte'}`;
+                    votesLeftText.innerText = `Puoi registrare ancora ${left} ${left === 1 ? 'persona' : 'persone'}`;
                 }
             };
 
@@ -245,10 +261,7 @@
 
             async function submitRSVP(isAttending) {
                 const currentCount = getVoteCount();
-                if (currentCount >= MAX_VOTES) {
-                    alert("Hai raggiunto il numero massimo di conferme per questo dispositivo.");
-                    return;
-                }
+                if (currentCount >= MAX_VOTES) return;
 
                 const btnYes = document.getElementById('btn-confirm-yes');
                 const btnNo = document.getElementById('btn-confirm-no');
@@ -263,13 +276,11 @@
                         timestamp: new Date().toISOString()
                     });
                     
-                    // Incrementa contatore locale
                     localStorage.setItem(LOCAL_STORAGE_KEY, (currentCount + 1).toString());
-                    
                     document.getElementById('rsvp-content').classList.add('hidden');
                     document.getElementById('success-msg').classList.remove('hidden');
                 } catch (err) {
-                    alert("Impossibile inviare la risposta. Riprova più tardi.");
+                    alert("Impossibile inviare. Riprova più tardi.");
                     btnYes.disabled = false;
                     btnNo.disabled = false;
                 }
@@ -277,6 +288,20 @@
 
             document.getElementById('btn-confirm-yes').onclick = () => submitRSVP(true);
             document.getElementById('btn-confirm-no').onclick = () => submitRSVP(false);
+
+            // LOGICA ADMIN SEGRETA
+            document.getElementById('secret-admin-trigger').onclick = () => {
+                const pin = prompt("Inserisci il PIN per visualizzare le statistiche:");
+                if (pin === ADMIN_PIN) {
+                    document.getElementById('admin-section').classList.remove('hidden');
+                    window.scrollTo({
+                        top: document.getElementById('admin-section').offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                } else if (pin !== null) {
+                    alert("PIN errato.");
+                }
+            };
 
         } catch (e) {
             document.getElementById('connection-error').style.display = 'block';
