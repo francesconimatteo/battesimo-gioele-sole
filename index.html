@@ -83,12 +83,12 @@
                 <h2 class="text-xs md:text-sm uppercase tracking-[0.4em] text-[#8a7663] mb-4 font-bold">Santo Battesimo di</h2>
                 <h1 class="text-5xl md:text-7xl font-serif text-[#5d4e41] mb-8 tracking-tight italic">Sole e Gioele</h1>
                 
-                <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10 border-y border-gold/30 py-6 px-4">
-                    <div class="flex items-center gap-3 text-brown">
+                <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10 border-y border-gold/30 py-6 px-4 text-brown">
+                    <div class="flex items-center gap-3">
                         <i data-lucide="calendar" class="text-gold w-6 h-6"></i>
                         <span class="text-xl md:text-2xl font-medium italic leading-none">Domenica 19 Aprile</span>
                     </div>
-                    <div class="flex items-center gap-3 text-brown">
+                    <div class="flex items-center gap-3">
                         <i data-lucide="clock" class="text-gold w-6 h-6"></i>
                         <span class="text-xl md:text-2xl font-medium italic leading-none">Ore 15:00</span>
                     </div>
@@ -137,12 +137,15 @@
                     <p class="text-[#8a7663] italic">Facci sapere se sarai con noi!</p>
                 </div>
 
-                <div id="rsvp-form-body" class="max-w-md mx-auto space-y-6">
+                <div id="rsvp-form-body" class="max-w-md mx-auto space-y-5">
                     <!-- Campi Nome e Cognome -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <input type="text" id="firstName" class="form-input" placeholder="Il tuo nome">
                         <input type="text" id="lastName" class="form-input" placeholder="Il tuo cognome">
                     </div>
+
+                    <!-- Nuovo campo Note e Intolleranze -->
+                    <textarea id="notes" class="form-input resize-none h-24" placeholder="Note informative (allergie, intolleranze alimentari, necessità particolari...)"></textarea>
 
                     <div id="rsvp-controls" class="space-y-4 pt-4 border-t border-gold/20">
                         <button id="btn-confirm-yes" class="btn-rsvp-yes flex items-center justify-center gap-3">
@@ -152,7 +155,7 @@
                         <button id="btn-confirm-no" class="btn-rsvp-no">
                             Purtroppo non potrò
                         </button>
-                        <p id="votes-left" class="text-[10px] text-center mt-4 uppercase text-[#8a7663] font-bold tracking-widest opacity-60"></p>
+                        <p id="votes-left" class="text-[10px] text-center mt-4 uppercase text-[#8a7663] font-bold tracking-widest opacity-60 font-medium"></p>
                     </div>
                 </div>
 
@@ -164,12 +167,12 @@
             <div id="success-msg" class="hidden text-center py-12">
                 <i data-lucide="heart" class="w-16 h-16 text-rose-400 mx-auto mb-6 fill-rose-400"></i>
                 <h2 class="text-4xl font-serif mb-4 text-[#5d4e41]">Grazie!</h2>
-                <p class="text-[#8a7663] text-xl italic mb-8">La tua partecipazione è stata registrata con successo.</p>
+                <p class="text-[#8a7663] text-xl italic mb-8">La tua risposta è stata registrata con successo.</p>
                 <button onclick="window.location.reload()" class="text-[#5d4e41] font-bold uppercase tracking-widest text-xs border-b-2 border-gold pb-1 cursor-pointer">Registra un'altra persona</button>
             </div>
         </section>
 
-        <!-- DASHBOARD PRIVATA (PIN RICHIESTO) -->
+        <!-- DASHBOARD PRIVATA (PIN RICHIESTO: 2025) -->
         <div id="admin-section" class="hidden mt-12 mb-20 flex flex-col items-center admin-box">
             <div class="grid grid-cols-2 gap-6 max-w-md w-full mb-10">
                 <div class="bg-white border-2 border-gold px-8 py-8 rounded-[2rem] shadow-xl text-center">
@@ -182,17 +185,18 @@
                 </div>
             </div>
 
-            <div class="w-full bg-white rounded-3xl border-2 border-gold overflow-hidden shadow-2xl max-w-2xl mx-auto">
+            <div class="w-full bg-white rounded-3xl border-2 border-gold overflow-hidden shadow-2xl max-w-4xl mx-auto">
                 <div class="p-6 bg-[#f9f3ea] border-b-2 border-gold flex justify-between items-center">
                     <h4 class="font-bold text-xs uppercase tracking-widest text-[#8a7663]">Elenco Invitati (Privato)</h4>
-                    <span class="text-[9px] bg-[#cbb08c] text-white px-3 py-1 rounded-full uppercase font-black">Live</span>
+                    <span class="text-[9px] bg-[#cbb08c] text-white px-3 py-1 rounded-full uppercase font-black tracking-widest">Live</span>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-sm">
-                        <thead class="bg-stone-50 text-[10px] uppercase text-[#8a7663] font-bold tracking-tighter">
+                        <thead class="bg-stone-50 text-[10px] uppercase text-[#8a7663] font-bold">
                             <tr>
-                                <th class="px-6 py-4">Nome e Cognome</th>
-                                <th class="px-6 py-4">Scelta</th>
+                                <th class="px-6 py-4">Invitato</th>
+                                <th class="px-6 py-4">Partecipazione</th>
+                                <th class="px-6 py-4">Note / Intolleranze</th>
                             </tr>
                         </thead>
                         <tbody id="admin-list-body" class="divide-y divide-gold/10 text-brown">
@@ -201,12 +205,12 @@
                     </table>
                 </div>
             </div>
-            <p class="text-[9px] text-[#cbb08c] uppercase font-bold tracking-[0.3em] mt-8 italic underline cursor-pointer" onclick="location.reload()">Sincronizzato • Clicca per chiudere area admin</p>
+            <p class="text-[9px] text-[#cbb08c] uppercase font-bold tracking-[0.3em] mt-8 italic underline cursor-pointer" onclick="location.reload()">Sincronizzato • Clicca per chiudere area riservata</p>
         </div>
     </div>
 
     <footer class="text-center py-16 bg-white border-t border-gold opacity-60 relative">
-        <p class="text-gold text-xs tracking-[0.5em] font-bold uppercase mb-4">Sole & Gioele • 19 Aprile 2025</p>
+        <p class="text-gold text-xs tracking-[0.5em] font-bold uppercase mb-4 font-serif">Sole & Gioele • 19 Aprile 2025</p>
         
         <div class="mt-4 flex justify-center">
             <button id="secret-admin-trigger" class="opacity-40 hover:opacity-100 transition-opacity p-4 cursor-pointer">
@@ -232,7 +236,7 @@
             appId: "1:127131164270:web:b447e4f0f71f07956ed07f"
         };
 
-        const LOCAL_STORAGE_KEY = 'rsvp_sole_gioele_count_v2';
+        const LOCAL_STORAGE_KEY = 'rsvp_sole_gioele_v3_count';
         const MAX_VOTES = 5;
         const ADMIN_PIN = "2025"; 
 
@@ -253,7 +257,7 @@
                 if (count >= MAX_VOTES) {
                     formBody.classList.add('hidden');
                     banner.classList.remove('hidden');
-                } else {
+                } else if (votesLeftText) {
                     votesLeftText.innerText = `Puoi registrare ancora ${left} ${left === 1 ? 'persona' : 'persone'}`;
                 }
             };
@@ -261,7 +265,7 @@
             signInAnonymously(auth).then(() => {
                 updateRSVPGraphics();
                 
-                const rsvpRef = ref(db, 'rsvp_completi');
+                const rsvpRef = ref(db, 'rsvp_completi_v3');
                 onValue(rsvpRef, (snapshot) => {
                     const data = snapshot.val();
                     const countYesSpan = document.getElementById('count-yes');
@@ -276,7 +280,7 @@
                         const responses = Object.values(data);
                         responses.reverse().forEach(r => {
                             if(r.attending) yes++; else no++;
-                            // Popola lista per Matteo
+                            // Popola lista privata per Matteo
                             adminListBody.innerHTML += `
                                 <tr class="hover:bg-[#fdfaf5]">
                                     <td class="px-6 py-4 font-bold text-[#5d4e41]">${r.firstName || 'Anonimo'} ${r.lastName || ''}</td>
@@ -284,6 +288,9 @@
                                         <span class="px-2 py-1 rounded text-[10px] font-bold uppercase ${r.attending ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}">
                                             ${r.attending ? 'SÌ' : 'NO'}
                                         </span>
+                                    </td>
+                                    <td class="px-6 py-4 text-xs italic text-brown leading-tight">
+                                        ${r.notes || '<span class="opacity-30">-</span>'}
                                     </td>
                                 </tr>
                             `;
@@ -293,7 +300,7 @@
                     } else {
                         countYesSpan.innerText = "0";
                         countNoSpan.innerText = "0";
-                        adminListBody.innerHTML = "<tr><td colspan='2' class='p-10 text-center italic text-stone-300'>Nessun dato.</td></tr>";
+                        adminListBody.innerHTML = "<tr><td colspan='3' class='p-10 text-center italic text-stone-300'>Nessun dato ancora disponibile.</td></tr>";
                     }
                 }, (error) => {
                     document.getElementById('connection-error').style.display = 'block';
@@ -303,6 +310,7 @@
             async function submitRSVP(isAttending) {
                 const fName = document.getElementById('firstName').value.trim();
                 const lName = document.getElementById('lastName').value.trim();
+                const notes = document.getElementById('notes').value.trim();
 
                 if (!fName || !lName) {
                     alert("Per favore, inserisci Nome e Cognome per la partecipazione.");
@@ -318,11 +326,12 @@
                 btnNo.disabled = true;
 
                 try {
-                    const rsvpRef = ref(db, 'rsvp_completi');
+                    const rsvpRef = ref(db, 'rsvp_completi_v3');
                     const newEntryRef = push(rsvpRef);
                     await set(newEntryRef, {
                         firstName: fName,
                         lastName: lName,
+                        notes: notes,
                         attending: isAttending,
                         timestamp: new Date().toISOString()
                     });
@@ -331,7 +340,7 @@
                     document.getElementById('rsvp-content').classList.add('hidden');
                     document.getElementById('success-msg').classList.remove('hidden');
                 } catch (err) {
-                    alert("Impossibile inviare. Riprova più tardi.");
+                    alert("Errore nell'invio della risposta. Riprova tra pochi istanti.");
                     btnYes.disabled = false;
                     btnNo.disabled = false;
                 }
@@ -340,9 +349,9 @@
             document.getElementById('btn-confirm-yes').onclick = () => submitRSVP(true);
             document.getElementById('btn-confirm-no').onclick = () => submitRSVP(false);
 
-            // LOGICA ADMIN SEGRETA
+            // LOGICA ADMIN SEGRETA PER MATTEO
             document.getElementById('secret-admin-trigger').onclick = () => {
-                const pin = prompt("Matteo, inserisci il PIN (2025) per vedere i nomi dei partecipanti:");
+                const pin = prompt("Matteo, inserisci il PIN (2025) per visualizzare i dettagli degli invitati:");
                 if (pin === ADMIN_PIN) {
                     document.getElementById('admin-section').classList.remove('hidden');
                     window.scrollTo({
